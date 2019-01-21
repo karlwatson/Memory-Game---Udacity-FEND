@@ -1,5 +1,6 @@
 // Global constants & variables:
 const CARD_TYPES = ['fa-diamond', 'fa-paper-plane-o', 'fa-anchor', 'fa-bolt', 'fa-cube', 'fa-leaf', 'fa-bomb', 'fa-bicycle'];
+const RESTART_BUTTON = $('.fa-repeat');
 let isGameStarted = false;
 let timeLapsed = 0;
 let startTime = 0;
@@ -130,9 +131,34 @@ function incrementMoveCounter() {
 }
 
 
-//////////// Move Counter functionality:
+//////////// Card functionality:
 
 // Toggles Displaying a Card's Symbol
 function displayCardSymbol(card)  {
   card.toggleClass('open show');
 }
+
+
+//////////// Reset functionality:
+
+// Resets page
+function resetPage()  {
+  clearAllCards();
+  buildAllCards();
+  moveCounter = 0;
+  matchedCounter = 0;
+  updateMoveCounter();
+  renewStars();
+  isGameStarted = false;
+  console.log('Page Reset!!');
+}
+
+// Restart Button functionality - Event Listener
+RESTART_BUTTON.on('click', function(evt)  {
+  resetPage();
+});
+
+// Runs on Page load / refresh
+document.addEventListener('DOMContentLoaded', function () {
+  resetPage();
+});
