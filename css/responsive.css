@@ -1,0 +1,68 @@
+/* Media query for smaller screens - width sub 700px */
+@media screen and (max-width: 700px) {
+    .deck {
+      width: calc(100% - 40px);
+      min-height: 95vw;
+    }
+
+    .deck .card  {
+        height: 18vw;
+        width: 18vw;
+    }
+    .deck .card.match {
+        font-size: 24px;
+    }
+    .deck .card.open  {
+        font-size: 24px;
+    }
+    .score-panel  {
+      font-size: 18px;
+    }
+}
+
+/* Media query for sub 550px */
+@media screen and (max-width: 550px) {
+    .deck .card  {
+        height: 16.5vw;
+        width: 16.5vw;
+      }
+      .deck .card.match {
+        font-size: 20px;
+    }
+    .deck .card.open  {
+        font-size: 20px;
+    }
+    .score-panel  {
+      font-size: 14px;
+      width: 250px;
+    }
+    .title  {
+      font-size: 24px;
+    }
+    /* .modal-content  {
+      padding: 10px;
+      font-size: 14px;
+    } */
+}
+
+/* Media query for phones - width sub 400px */
+@media screen and (max-width: 400px) {
+
+  .deck .card  {
+      height: 15vw;
+      width: 15vw;
+    }
+    .deck .card.match {
+        font-size: 16px;
+    }
+    .deck .card.open  {
+        font-size: 16px;
+    }
+    .score-panel  {
+      font-size: 10px;
+      width: 150px;
+    }
+    .title  {
+      font-size: 20px;
+    }
+}
