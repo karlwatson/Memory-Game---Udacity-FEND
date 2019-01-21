@@ -240,4 +240,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Modal functionality & Event Listener:
 
-function openModal()  {}
+// Opens modal on game end
+function openModal()  {
+  $('.modal-text').append(endOutput());
+  // modal.style.display = "block";
+  $('.modal').css('display', 'block');
+}
+
+// Close Modal event Listener
+closeBtn.on('click', function(evt)  {
+  // modal.style.display = "none";
+  $('.modal').css('display', 'none');
+  resetPage();
+});
+
+// End game Logic:
+function endOutput()  {
+  let numberOfStars = ($('.fa-star').length);
+  // console.log("Congratulations! You completed the game in " + convertTime(timeLapsed) + ", & you got a " + numberOfStars + " star rating from " + moveCounter + " turns!");
+  return ("Congratulations! \nYou completed the game in " + convertTime(timeLapsed) + ", & you got a " + numberOfStars + " star rating from " + moveCounter + " turns! \n Close to restart game. ");
+}
