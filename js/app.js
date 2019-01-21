@@ -6,6 +6,8 @@ let startTime = 0;
 let endTime = 0;
 let moveCounter = 0;
 let matchedCounter = 0;
+let openCards = [0, 0];
+let eventStore = [0, 0];
 
 //////////// Card functionality:
 
@@ -125,4 +127,12 @@ function incrementMoveCounter() {
   if ((moveCounter === 15) || (moveCounter === 22)) {
     deleteStar();
   }
+}
+
+
+//////////// Move Counter functionality:
+
+// Toggles Displaying a Card's Symbol
+function displayCardSymbol(card)  {
+  card.toggleClass('open show');
 }
