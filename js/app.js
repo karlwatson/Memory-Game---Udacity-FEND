@@ -87,4 +87,23 @@ function convertTime(millisec) {
    }
 }
 
-  
+
+//////////// Stars functionality:
+
+// Removes one star (changes it to empty star)
+function deleteStar() {
+  let visibleStars = $('.fa-star');
+  let lastVisibleStar = visibleStars[($('.fa-star').length)-1];
+  lastVisibleStar.remove();
+  let stars = $('.stars');
+  stars.append('<li><i class="fa fa-star-o"></i></li>');
+}
+
+// Renews star counter to three stars (for Reset)
+function renewStars() {
+  // let visibleStars = $('.fa-star');
+  $('.fa-star').remove();
+  $('.fa-star-o').remove();
+  let stars = $('.stars');
+  stars.append('<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>');
+}
