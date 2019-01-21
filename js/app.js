@@ -9,6 +9,8 @@ let moveCounter = 0;
 let matchedCounter = 0;
 let openCards = [0, 0];
 let eventStore = [0, 0];
+let modal = $('.modal');
+let closeBtn = $('.close');
 
 //////////// Card functionality:
 
@@ -138,6 +140,78 @@ function displayCardSymbol(card)  {
   card.toggleClass('open show');
 }
 
+// Logic for clicking on a card - Event Listener
+$('.deck').on('click', 'li.card', function(evt)  {
+//console logs for testing:////////
+  console.log($(this));
+  console.log($(this).attr('class'));
+  let symbolName = $(evt.target).children().attr('class')
+  console.log(symbolName);
+  console.log('////');
+
+  if (!isGameStarted) {
+    storeStartTime();
+    isGameStarted = true;
+  }
+
+  if ( !($(this).attr('class').search('open') === -1) || !(openCards[1] === 0) ) {
+    console.log("Already clicked on this!")
+    return true;
+
+  } else {
+
+    if (!(openCards[0]))  {
+    // if (openCards[0] != 0)  {
+      console.log("Opencards is empty, copy element");
+      openCards[0] = symbolName;
+      displayCardSymbol($(this));
+      eventStore[0] = $(this);
+    } else {
+
+      openCards[1] = symbolName;
+      eventStore[1] = $(this);
+      if (openCards[1] === openCards[0])  {
+
+        displayCardSymbol($(this));
+        console.log("Cards are a Match!!!");
+
+        window.setTimeout(function() {
+          eventStore[0].toggleClass('match')
+          eventStore[1].toggleClass('match')
+          openCards = [0, 0];
+          // not strictly needed
+          eventStore = [0, 0];
+          incrementMoveCounter();
+
+          matchedCounter++;
+          if (matchedCounter === 8) {
+            calculateTime();
+            endOutput();
+            openModal();
+          }
+
+        }, 400);
+
+      } else {
+
+        displayCardSymbol($(this));
+        console.log("Cards DO NOT Match");
+
+        window.setTimeout(function() {
+          displayCardSymbol(eventStore[1]);
+          displayCardSymbol(eventStore[0]);
+          openCards = [0, 0];
+          // not strictly needed
+          eventStore = [0, 0];
+          incrementMoveCounter();
+        }, 650);
+        // openCards = [0, 0];
+      }
+
+    }
+  }
+});
+
 
 //////////// Reset functionality:
 
@@ -158,7 +232,12 @@ RESTART_BUTTON.on('click', function(evt)  {
   resetPage();
 });
 
-// Runs on Page load / refresh
+// Runs on Page load / refresh -  Event Listener
 document.addEventListener('DOMContentLoaded', function () {
   resetPage();
 });
+
+
+// Modal functionality & Event Listener:
+
+function openModal()  {}
