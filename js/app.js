@@ -4,7 +4,8 @@ let isGameStarted = false;
 let timeLapsed = 0;
 let startTime = 0;
 let endTime = 0;
-
+let moveCounter = 0;
+let matchedCounter = 0;
 
 //////////// Card functionality:
 
@@ -106,4 +107,22 @@ function renewStars() {
   $('.fa-star-o').remove();
   let stars = $('.stars');
   stars.append('<li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li><li><i class="fa fa-star"></i></li>');
+}
+
+
+//////////// Move Counter functionality:
+
+// Copy value stored in moveCounter variable
+function updateMoveCounter()  {
+  // console.log(moveCounter);
+  $('.moves').html(moveCounter);
+}
+
+// Called on completing a move to update counter AND manages stars
+function incrementMoveCounter() {
+  moveCounter++;
+  updateMoveCounter();
+  if ((moveCounter === 15) || (moveCounter === 22)) {
+    deleteStar();
+  }
 }
