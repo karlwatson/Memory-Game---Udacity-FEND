@@ -57,14 +57,6 @@ function clearAllCards(cardType)  {
 // https://www.w3schools.com/js/js_date_methods.asp
 // https://pawelgrzybek.com/rounding-and-truncating-numbers-in-javascript/
 
-// Show time: test output of different date / time variables: (to delete!!)
-function callTime() {
-  let d = new Date();
-  let a = d.getTime();
-  console.log('getTime():' + a);
-  console.log('Date.now():' + Date.now())
-}
-
 // Stores start time (in ms)
 function storeStartTime() {
   startTime = Date.now();
@@ -107,7 +99,6 @@ function deleteStar() {
 
 // Renews star counter to three stars (for Reset)
 function renewStars() {
-  // let visibleStars = $('.fa-star');
   $('.fa-star').remove();
   $('.fa-star-o').remove();
   let stars = $('.stars');
@@ -119,7 +110,6 @@ function renewStars() {
 
 // Copy value stored in moveCounter variable
 function updateMoveCounter()  {
-  // console.log(moveCounter);
   $('.moves').html(moveCounter);
 }
 
@@ -142,12 +132,8 @@ function displayCardSymbol(card)  {
 
 // Logic for clicking on a card - Event Listener
 $('.deck').on('click', 'li.card', function(evt)  {
-//console logs for testing:////////
-  console.log($(this));
-  console.log($(this).attr('class'));
+
   let symbolName = $(evt.target).children().attr('class')
-  console.log(symbolName);
-  console.log('////');
 
   if (!isGameStarted) {
     storeStartTime();
@@ -155,14 +141,13 @@ $('.deck').on('click', 'li.card', function(evt)  {
   }
 
   if ( !($(this).attr('class').search('open') === -1) || !(openCards[1] === 0) ) {
-    console.log("Already clicked on this!")
+    //exits if card already clicked on
     return true;
 
   } else {
 
     if (!(openCards[0]))  {
-    // if (openCards[0] != 0)  {
-      console.log("Opencards is empty, copy element");
+      //stores first card value if none currently stored
       openCards[0] = symbolName;
       displayCardSymbol($(this));
       eventStore[0] = $(this);
@@ -171,9 +156,8 @@ $('.deck').on('click', 'li.card', function(evt)  {
       openCards[1] = symbolName;
       eventStore[1] = $(this);
       if (openCards[1] === openCards[0])  {
-
+        //logic fo matching cards
         displayCardSymbol($(this));
-        console.log("Cards are a Match!!!");
 
         window.setTimeout(function() {
           eventStore[0].toggleClass('match')
@@ -195,8 +179,7 @@ $('.deck').on('click', 'li.card', function(evt)  {
       } else {
 
         displayCardSymbol($(this));
-        console.log("Cards DO NOT Match");
-
+        //logic for cards that do not match
         window.setTimeout(function() {
           displayCardSymbol(eventStore[1]);
           displayCardSymbol(eventStore[0]);
@@ -224,7 +207,6 @@ function resetPage()  {
   updateMoveCounter();
   renewStars();
   isGameStarted = false;
-  console.log('Page Reset!!');
 }
 
 // Restart Button functionality - Event Listener
@@ -243,13 +225,11 @@ document.addEventListener('DOMContentLoaded', function () {
 // Opens modal on game end
 function openModal()  {
   $('.modal-text').append(endOutput());
-  // modal.style.display = "block";
   $('.modal').css('display', 'block');
 }
 
 // Close Modal event Listener
 closeBtn.on('click', function(evt)  {
-  // modal.style.display = "none";
   $('.modal').css('display', 'none');
   resetPage();
 });
@@ -257,6 +237,5 @@ closeBtn.on('click', function(evt)  {
 // End game Logic:
 function endOutput()  {
   let numberOfStars = ($('.fa-star').length);
-  // console.log("Congratulations! You completed the game in " + convertTime(timeLapsed) + ", & you got a " + numberOfStars + " star rating from " + moveCounter + " turns!");
   return ("Congratulations! \nYou completed the game in " + convertTime(timeLapsed) + ", & you got a " + numberOfStars + " star rating from " + moveCounter + " turns! \n Close to restart game. ");
 }
